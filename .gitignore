@@ -1,0 +1,46 @@
+# Data (CSV is ~310 MB; do not commit)
+creditcard_2023.csv
+data/
+*.csv
+!results/subsets/*.csv
+
+# Paper PDF (optional local copy)
+*.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Models, Optuna, caches
+*.joblib
+*.pkl
+*.pt
+*.ckpt
+*.db
+*.sqlite
+catboost_info/
+mlruns/
+.optuna/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Heavy generated artifacts
+results/models/
+results/cache/

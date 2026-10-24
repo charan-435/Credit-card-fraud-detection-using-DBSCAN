@@ -1,0 +1,57 @@
+[
+  {
+    "finding":"Raw file is 50\/50; D1-D3 are 1% by construction",
+    "decision":"treat paper imbalance-handling claims as methods on a synthetic 1% sample",
+    "reason":"cannot claim real-world rarity from this file"
+  },
+  {
+    "finding":"Amount scale >> V features (mean 12041 vs |V| 0.35); skew=0.009",
+    "decision":"standardise Amount; skip log1p (skew ~0) and treat Amount as a weak feature",
+    "reason":"KNN\/DBSCAN\/SVM are distance-based"
+  },
+  {
+    "finding":"Max |feature corr| = 0.698; PCA-95 needs 26 components",
+    "decision":"skip extra PCA in our methods (keep it only in the paper replica); 95% variance still needs almost all components",
+    "reason":"V1-V28 are already PCA features; a second PCA is only for paper fidelity"
+  },
+  {
+    "finding":"Top univariate AUC is V14=0.977; Amount AUC=0.515",
+    "decision":"use top-MI \/ top-AUC selection as one FE variant; do not drop Amount until measured",
+    "reason":"a few V columns carry most of the signal"
+  },
+  {
+    "finding":"IQR outlier share: fraud 0.95 vs legit 0.49",
+    "decision":"include IsolationForest and LOF scores as FE candidates",
+    "reason":"if fraud lives in tails, anomaly scores beat cluster ids"
+  },
+  {
+    "finding":"DBSCAN eps=2 on D1 train: 224 clusters, noise=0.380, fraud-in-noise=0.778; k-dist median=1.893",
+    "decision":"do not rely on DBSCAN labels as the main signal; try IsolationForest\/LOF scores (fraud often looks like noise)",
+    "reason":"paper hyperparameters may not match the k-distance knee"
+  },
+  {
+    "finding":"Leakage-safe logreg PR-AUC=0.950, depth-3 tree PR-AUC=0.460",
+    "decision":"trees\/boosting as the fair FE workhorse; skip autoencoders (linear model already saturates); still run XGBoost\/LightGBM\/CatBoost and sklearn MLP for the paper's missing-baseline gap",
+    "reason":"a shallow probe is the honesty check the paper skipped"
+  },
+  {
+    "finding":"1% class rate after sampling",
+    "decision":"class weights \/ scale_pos_weight first; SMOTE is optional because features already separate",
+    "reason":"compare rebalancing to DBSCAN augmentation with the same model"
+  },
+  {
+    "finding":"Near-linear separability probe PR-AUC=0.950",
+    "decision":"skip autoencoder reconstruction error",
+    "reason":"PLAN: skip AE if 2.10 already shows near-linear separation"
+  },
+  {
+    "finding":"Paper uses RF(n=3), KNN(k=3), RBF-SVM",
+    "decision":"replicate those as baseline only; Step 5 uses XGBoost, LightGBM, CatBoost, MLP",
+    "reason":"n_estimators=3 is an unusually weak forest; boosting is the missing strong baseline"
+  },
+  {
+    "finding":"PyTorch DLL failed to load on this Windows Anaconda env",
+    "decision":"use sklearn MLPClassifier with early stopping instead of PyTorch",
+    "reason":"do not silently drop DL; document the fallback"
+  }
+]
