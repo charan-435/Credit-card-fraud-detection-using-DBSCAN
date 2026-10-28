@@ -27,7 +27,7 @@ The paper proposes using DBSCAN cluster labels as extra features fed into RF, KN
 
 ---
 
-## 🛠️ Methodology
+##  Methodology
 
 ### 1. Data preparation
 - Stratified train/test split (80/20) → 64,640 train | 16,160 test
