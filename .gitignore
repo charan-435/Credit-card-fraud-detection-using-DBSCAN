@@ -44,3 +44,5 @@ Thumbs.db
 # Heavy generated artifacts
 results/models/
 results/cache/
+spare.ipynb
+notebooks
