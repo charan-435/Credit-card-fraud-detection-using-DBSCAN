@@ -4,8 +4,7 @@ data/
 *.csv
 !results/subsets/*.csv
 
-# Paper PDF (optional local copy)
-*.pdf
+
 
 # Python
 __pycache__/
