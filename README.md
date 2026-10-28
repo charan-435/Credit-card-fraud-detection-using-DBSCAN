@@ -134,3 +134,9 @@ jupyter notebook credit_card_fraud_detection.ipynb
 
 ---
 
+## 👥 Team
+
+| Name | GitHub |
+|---|---|
+| M Charan Sree Teja | [@charan-435](https://github.com/charan-435) |
+| Deshmane Lalit Santosh | [@lalitdeshmane10-cloud](https://github.com/lalitdeshmane10-cloud) |
